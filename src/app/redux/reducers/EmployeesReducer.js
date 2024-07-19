@@ -33,12 +33,16 @@ export const employeesSlide = createSlice({
       );
       state.reload = !state.reload;
     },
+    searchEmployeesReducer: (state, action) => {
+      state.employees = action.payload;
+    },
   },
 });
 export const {
   getAllEmployeesReducer,
   addEmployeeReducer,
   updateEmployeeReducer,
-  deleteEmployeeReducer
+  deleteEmployeeReducer,
+  searchEmployeesReducer,
 } = employeesSlide.actions;
 export default employeesSlide.reducer;

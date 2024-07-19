@@ -63,7 +63,7 @@ const DistrictsDialog = ({ open, onClose, district }) => {
     dispatch(addDistrictAction(districtFormData));
   };
   const handleUpdateDistrict = () => {
-    dispatch(updateDistrictAction(districtFormData.id, districtFormData));
+    dispatch(updateDistrictAction(districtFormData));
   };
   const handleClose = () => {
     setDistrictFormData({});

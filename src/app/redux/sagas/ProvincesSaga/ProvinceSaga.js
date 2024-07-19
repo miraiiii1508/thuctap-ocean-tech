@@ -53,8 +53,8 @@ function* editProvincesSaga(action) {
   try {
     const response = yield call(
       updateProvincesApi,
-      action.payload,
-      action.data
+      action.payload.id,
+      action.payload
     );
     if (response && response.data && response.data.code === SUCCESS_CODE) {
       yield put(updateProvinces(response?.data?.data));

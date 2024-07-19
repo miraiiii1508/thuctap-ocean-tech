@@ -61,7 +61,7 @@ const ProvincesDialog = ({ open, onClose, province }) => {
     dispatch(addProvinceAction(provinceFormData));
   };
   const handUpdateProvince = () => {
-    dispatch(updateProvinceAction(provinceFormData.id, provinceFormData));
+    dispatch(updateProvinceAction(provinceFormData));
   };
   const handleSubmit = (e) => {
     e.preventDefault();

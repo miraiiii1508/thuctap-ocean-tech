@@ -51,7 +51,11 @@ function* addDistrictsSaga(action) {
 }
 function* updateDistrictSaga(action) {
   try {
-    const response = yield call(updateDistrictsApi, action.id, action.data);
+    const response = yield call(
+      updateDistrictsApi,
+      action.payload.id,
+      action.payload
+    );
     console.log(response);
     if (response && response.data && response.data.code === SUCCESS_CODE) {
       yield put(updateDistrictReducer(response?.data?.data));

@@ -11,11 +11,10 @@ export const addEmployeeAction = (data) => {
     payload: data,
   };
 };
-export const updateEmployeeAction = (id, data) => {
+export const updateEmployeeAction = (data) => {
   return {
     type: typeEmployee.UPDATE_EMPLOYEE_REQUEST,
-    id: id,
-    updateData: data,
+    payload: data,
   };
 };
 export const deleteEmployeeAction = (id) => {

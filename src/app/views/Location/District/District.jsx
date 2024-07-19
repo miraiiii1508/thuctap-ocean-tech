@@ -12,7 +12,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsDialog from "./DistrictDialog";
-import { deleteDistrictAction, getDistrictsAction, searchDistrictsAction } from "app/redux/actions/LocationAction";
+import {
+  deleteDistrictAction,
+  getDistrictsAction,
+  searchDistrictsAction,
+} from "app/redux/actions/LocationAction";
 const useStyles = makeStyles({
   widthStyle: {
     width: "200px",
@@ -20,6 +24,9 @@ const useStyles = makeStyles({
   customStyle: {
     display: "flex",
     justifyContent: "space-between",
+  },
+  iconButton: {
+    padding: "12px 6px",
   },
 });
 const Districts = () => {
@@ -35,7 +42,7 @@ const Districts = () => {
       render: (row) => {
         return (
           <>
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon
                 color="primary"
                 onClick={() => {
@@ -46,7 +53,7 @@ const Districts = () => {
               </Icon>
             </IconButton>
 
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon
                 color="error"
                 onClick={() => {
@@ -117,10 +124,10 @@ const Districts = () => {
       <div className={classes.customStyle}>
         <div>
           <Button
-            className="mt-4 mb-16 mr-16 align-bottom"
+            className="mt-16 mb-16 mr-16 align-bottom"
             variant="contained"
             color="primary"
-            size="large"
+            size="medium"
             onClick={handleAddDistrict}
           >
             {t("Add")}
@@ -146,6 +153,7 @@ const Districts = () => {
       <MaterialTable
         columns={columns}
         data={dataForTable}
+        style={{ backgroundColor: "#fafafa" }}
         options={{
           search: false,
           toolbar: false,

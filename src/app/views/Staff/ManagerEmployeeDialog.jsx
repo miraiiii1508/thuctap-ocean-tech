@@ -40,6 +40,9 @@ const useStyles = makeStyles({
     right: 8,
     top: 8,
   },
+  iconButton: {
+    padding: "12px 6px",
+  },
 });
 const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
   const classes = useStyles();
@@ -72,10 +75,19 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
   const [statusForm, setStatusForm] = useState("");
   const [openConfirmCertificateDialog, setOpenConfirmCertificateDialog] =
     useState(false);
+  const formatDate = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+  };
+  const formatDateForStorage = (date) => {
+    const [day, month, year] = date.split("/");
+    return `${year}-${month}-${day}`;
+  };
   const dataCertificate = employeeFormData.certificates?.map((certificate) => ({
     ...certificate,
+    effectiveDate: formatDate(certificate.effectiveDate),
+    expirationDate: formatDate(certificate.expirationDate),
   }));
-
   useEffect(() => {
     if (employees && Object.keys(employees).length > 0) {
       setEmployeeFormData(employees);
@@ -152,7 +164,7 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
   };
 
   const handUpdateEmployee = () => {
-    dispatch(updateEmployeeAction(employeeFormData.id, employeeFormData));
+    dispatch(updateEmployeeAction(employeeFormData));
     handleCloseDialog();
   };
 
@@ -181,9 +193,14 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
       ...employeeFormData,
       certificates: [...employeeFormData.certificates, data],
     });
+    console.log(certificate);
   };
   const handleUpdateCertificateDialog = (data) => {
-    setCertificate(data);
+    setCertificate({
+      ...data,
+      effectiveDate: formatDateForStorage(data.effectiveDate),
+      expirationDate: formatDateForStorage(data.expirationDate),
+    });
     handleOpenCertificateDialog();
   };
   const handleUpdateCertificate = (dataUpdate) => {
@@ -229,7 +246,7 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
       render: (row) => {
         return (
           <>
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon
                 color="primary"
                 onClick={() => handleUpdateCertificateDialog(row)}
@@ -238,7 +255,7 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
               </Icon>
             </IconButton>
 
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon color="error" onClick={() => handleOpenDeleteDialog(row)}>
                 delete
               </Icon>
@@ -493,7 +510,7 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
                 options={{
                   search: false,
                   sorting: true,
-                  paging: true,
+                  paging: false,
                   filtering: false,
                   toolbar: false,
                   header: true,
@@ -508,14 +525,6 @@ const ManagerEmployeeDialog = ({ open, onClose, employees }) => {
                 localization={{
                   body: {
                     emptyDataSourceMessage: "Không có văn bằng",
-                  },
-                  pagination: {
-                    labelRowsSelect: `Bản ghi`,
-                    labelDisplayedRows: `{from}-{to} trong {count}`,
-                    firstTooltip: "Trang đầu",
-                    previousTooltip: "Trang trước",
-                    nextTooltip: "Trang tiếp",
-                    lastTooltip: "Trang cuối",
                   },
                 }}
               />

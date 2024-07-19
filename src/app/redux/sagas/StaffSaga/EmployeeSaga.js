@@ -11,6 +11,7 @@ import {
   addEmployeeReducer,
   deleteEmployeeReducer,
   getAllEmployeesReducer,
+  searchEmployeesReducer,
   updateEmployeeReducer,
 } from "app/redux/reducers/EmployeesReducer";
 import { toast } from "react-toastify";
@@ -48,8 +49,8 @@ function* updateEmployeeSaga(action) {
   try {
     const response = yield call(
       updateEmployeesApi,
-      action.id,
-      action.updateData
+      action.payload.id,
+      action.payload
     );
     if (response && response.data && response.data.code === SUCCESS_CODE) {
       yield put(updateEmployeeReducer(response?.data?.data));
@@ -77,7 +78,7 @@ function* deleteEmployeeSage(action) {
 function* searchEmployeesSaga(action) {
   try {
     const response = yield call(searchEmployeesApi, action.payload);
-    console.log(response);
+    yield put(searchEmployeesReducer(response.data.data.content));
   } catch (e) {
     console.error(e);
   }

@@ -48,7 +48,11 @@ function* addWardSaga(action) {
 }
 function* updateWardSaga(action) {
   try {
-    const response = yield call(updateWardsApi, action.id, action.data);
+    const response = yield call(
+      updateWardsApi,
+      action.payload.id,
+      action.payload
+    );
     if (response && response.data && response.data.code === SUCCESS_CODE) {
       yield put(updateWardReducer(response?.data?.data));
       toast.success(response.data.message);

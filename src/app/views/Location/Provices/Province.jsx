@@ -21,6 +21,9 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
+  iconButton: {
+    padding: "12px 6px",
+  },
 });
 const Provinces = () => {
   const columns = [
@@ -35,7 +38,7 @@ const Provinces = () => {
       render: (row) => {
         return (
           <>
-            <IconButton>
+            <IconButton  className={classes.iconButton}>
               <Icon
                 color="primary"
                 onClick={() => {
@@ -46,7 +49,7 @@ const Provinces = () => {
               </Icon>
             </IconButton>
 
-            <IconButton>
+            <IconButton  className={classes.iconButton}>
               <Icon
                 color="error"
                 onClick={() => {
@@ -115,10 +118,10 @@ const Provinces = () => {
       <div className={classes.customStyle}>
         <div>
           <Button
-            className="mt-4 mb-16 mr-16 align-bottom"
+            className="mt-16 mb-16 mr-16 align-bottom"
             variant="contained"
             color="primary"
-            size="large"
+            size="medium"
             onClick={handleAddProvince}
           >
             {t("Add")}
@@ -144,9 +147,11 @@ const Provinces = () => {
       <MaterialTable
         columns={columns}
         data={dataForTable}
+        style={{ backgroundColor: "#fafafa" }}
         options={{
           search: false,
           toolbar: false,
+          
           headerStyle: {
             backgroundColor: "#358600",
             color: "#fff",

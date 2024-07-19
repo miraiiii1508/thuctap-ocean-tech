@@ -26,6 +26,9 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
+  iconButton: {
+    padding: "12px 6px",
+  },
 });
 const Wards = () => {
   const columns = [
@@ -40,7 +43,7 @@ const Wards = () => {
       render: (row) => {
         return (
           <>
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon
                 color="primary"
                 onClick={() => {
@@ -51,7 +54,7 @@ const Wards = () => {
               </Icon>
             </IconButton>
 
-            <IconButton>
+            <IconButton className={classes.iconButton}>
               <Icon
                 color="error"
                 onClick={() => {
@@ -73,7 +76,7 @@ const Wards = () => {
   const wardState = useSelector((state) => state.Wards);
   const districtState = useSelector((state) => state.district.reload);
   const reloadProvince = useSelector((state) => state.provinces.reload);
-  const { wards, reload, success } = wardState;
+  const { wards, reload } = wardState;
   const tableData = wards.map((ward) => ({ ...ward }));
   const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
   const [rowData, setRowData] = useState({});
@@ -123,10 +126,10 @@ const Wards = () => {
       <div className={classes.customStyle}>
         <div>
           <Button
-            className="mt-4 mb-16 mr-16 align-bottom"
+            className="mt-16 mb-16 mr-16 align-bottom"
             variant="contained"
             color="primary"
-            size="large"
+            size="medium"
             onClick={handAddNewWard}
           >
             {t("Add")}
@@ -152,6 +155,7 @@ const Wards = () => {
       <MaterialTable
         columns={columns}
         data={tableData}
+        style={{ backgroundColor: "#fafafa" }}
         options={{
           search: false,
           toolbar: false,

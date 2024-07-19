@@ -83,7 +83,7 @@ const WardsDialog = ({ open, onClose, ward }) => {
     dispatch(addWardAction(wardFormData));
   };
   const handleUpdateWard = () => {
-    dispatch(updateWardAction(wardFormData.id, wardFormData));
+    dispatch(updateWardAction(wardFormData));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -199,13 +199,13 @@ const WardsDialog = ({ open, onClose, ward }) => {
                   value={wardFormData.area || ""}
                   onChange={handleOnchange}
                   fullWidth
-                  validators={["required", "minNumber:0"]}
-                  errorMessages={[
-                    "Vui lòng nhập diện tích",
-                    "Diện tích không được âm",
-                  ]}
+                  validators={["minNumber:0"]}
+                  errorMessages={["Diện tích không được âm"]}
                   size="small"
                   variant="outlined"
+                  inputProps={{
+                    step: "0.01",
+                  }}
                 />
               </Grid>
             </Grid>

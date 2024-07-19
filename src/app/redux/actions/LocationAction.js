@@ -11,11 +11,10 @@ export const addProvinceAction = (data) => {
     payload: data,
   };
 };
-export const updateProvinceAction = (id, data) => {
+export const updateProvinceAction = (data) => {
   return {
     type: typeProvinces.EDIT_PROVINCES_REQUEST,
-    payload: id,
-    data: data,
+    payload: data,
   };
 };
 export const deleteProvinceAction = (data) => {
@@ -48,11 +47,10 @@ export const addDistrictAction = (data) => {
     payload: data,
   };
 };
-export const updateDistrictAction = (id, data) => {
+export const updateDistrictAction = (data) => {
   return {
     type: typeDistricts.UPDATE_DISTRICT_REQUEST,
-    id: id,
-    data: data,
+    payload: data,
   };
 };
 export const deleteDistrictAction = (data) => {
@@ -79,11 +77,10 @@ export const addWardAction = (data) => {
     payload: data,
   };
 };
-export const updateWardAction = (id, data) => {
+export const updateWardAction = (data) => {
   return {
     type: typeWards.UPDATE_WARD_REQUEST,
-    id: id,
-    data: data,
+    payload: data,
   };
 };
 export const deleteWardAction = (data) => {

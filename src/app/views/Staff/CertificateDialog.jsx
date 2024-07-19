@@ -76,19 +76,21 @@ const CertificateDialog = ({
     });
   };
   const handleSubmit = () => {
+    const formattedData = {
+      ...certificateFormData,
+    };
     switch (formData) {
       case "ADD":
-        handleAddCertificate(certificateFormData);
+        handleAddCertificate(formattedData);
         toast.success("Thêm chứng chỉ thành công");
         break;
       case "UPDATE":
-        handleUpdateCertificate(certificateFormData);
+        handleUpdateCertificate(formattedData);
         toast.success("Sửa chứng chỉ thành công");
         break;
       default:
         break;
     }
-
     handleClose();
   };
   return (
